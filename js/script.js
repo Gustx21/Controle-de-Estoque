@@ -1,54 +1,37 @@
-let pasta = {};
-let banco = [];
+let itens = {};
 let opcao = 0;
 
 function criar() {
-  let nome, arquivo, total;
+  let nome, total;
   let i = 0;
 
-  pasta = prompt("Insira o nome da pasta").toUpperCase();
   total = parseInt(prompt("Quantos itens serão adicionados:"));
 
   for (; i < total; i++) {
-    nome = prompt("Digite o nome do arquivo:").toUpperCase().trim();
-    arquivo = parseFloat(prompt(`Digite a propriedade de ${nome}:`));
+    nome = prompt("Digite o nome do produto:").toUpperCase().trim();
+    quantidade = parseFloat(prompt(`Digite a quantidade total de ${nome}:`));
     
-    pasta[nome] = arquivo;
+    itens[nome] = quantidade;
   };
-
-  banco.push(pasta);
-};
-
-function alterar() {
-  let valorRemover, totalRemover, substituir;
-
-  valorRemover = parseInt(prompt("Insira a coluna a ser removida:"));
-  totalRemover = parseInt(prompt("Insira quantos valores serão removidos:"));
-  substituir = prompt("Insira o valor a ser substituído:").toLowerCase();
-
-  banco.splice(valorRemover, totalRemover, substituir);
 };
 
 function remover() {
-  let remove = prompt("Insira o nome da pasta a ser removida:").toLowerCase();
+  let remove = prompt("Insira o nome da pasta a ser removida:").toUpperCase();
 
-  delete pasta[remove];
+  delete itens[remove];
 };
 
-while (opcao !== 4) {
-  opcao = parseInt(prompt("Insira uma opção:\n1. Criar.\n2. Alterar.\n3. Remover.\n4. Sair."));
+while (opcao !== 3) {
+  opcao = parseInt(prompt("Insira uma opção:\n1. Criar.\n2. Remover.\n3. Sair."));
 
   switch (opcao) {
     case 1:
       criar();
       break;
     case 2:
-      alterar();
-      break;
-    case 3:
       remover();
       break;
-    case 4:
+    case 3:
       alert("Encerrando.");
       break;
     default:
@@ -56,5 +39,3 @@ while (opcao !== 4) {
       break;
   };
 };
-console.table(pasta);
-console.table(banco);
