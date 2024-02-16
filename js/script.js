@@ -1,4 +1,5 @@
 let itens = {};
+let estoque = [];
 let opcao = 0;
 
 function criar() {
@@ -20,9 +21,22 @@ function criar() {
 
     alert(`O item ${produto} foi adicionado com ${quantidade} unidades.`);
   };
+
+  estoque.push(itens);
 };
 
-function listar() {};
+function listar() {
+  if (estoque.length === 0) {
+    alert("O estoque está vazio.");
+    return;
+  };
+
+  const listarEstoque = estoque.map(function (item, indice) {
+    return `${indice + 1}. ${itens.nome}: ${itens.quantidade} unidades.`
+  }).join("\n");
+
+  alert(`Itens no estoque:\n${listarEstoque}`);
+};
 
 function remover() {
   listar();
