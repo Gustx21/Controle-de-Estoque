@@ -1,34 +1,42 @@
-let itens = {}; // Declarando um objeto
-let opcao = 0; // Criando a variável do While
+let itens = {};
+let opcao = 0;
 
-// Função de criar os parâmetros
 function criar() {
-  let nome, total;
+  let produto, total;
   let i = 0;
 
-  total = parseInt(prompt("Quantos itens serão adicionados:")); // Valor do Loop For
+  total = parseInt(prompt("Quantos itens serão adicionados ao estoque:"));
+
+  if (isNaN(total) || total <= 0) {
+    alert("Insira um valor válido.");
+    return;
+  };
 
   for (; i < total; i++) {
-    // O For repete as perguntas até 'I' ser igual a 'Total'
-    nome = prompt("Digite o nome do produto:").toUpperCase().trim();
-    quantidade = parseFloat(prompt(`Digite a quantidade total de ${nome}:`));
+    produto = prompt("Digite o nome do produto:").toUpperCase().trim();
+    quantidade = parseFloat(prompt(`Digite a quantidade total de ${produto}:`));
     
-    itens[nome] = quantidade; // Criando as lista dentro do Objeto
+    itens[produto] = quantidade;
+
+    alert(`O item ${produto} foi adicionado com ${quantidade} unidades.`);
   };
 };
 
-// Função remove os parâmetros
-function remover() {
-  let remove = prompt("Insira o nome da pasta a ser removida:").toUpperCase();
+function listar() {};
 
-  delete itens[remove]; //Remoção do nome do Objeto inserido pelo usuário
+function remover() {
+  listar();
+
+  let remove = prompt("Insira o nome do item a ser removida:").toUpperCase().trim();
+
+  delete itens[remove];
+
+  alert(`O item ${remove} foi removido.`);
 };
 
-// Repetição para Chamar Menu até que usuário selecione a opção Sair
 while (opcao !== 3) {
   opcao = parseInt(prompt("Insira uma opção:\n1. Criar.\n2. Remover.\n3. Sair."));
 
-  // Chamada da função apartir do Switch
   switch (opcao) {
     case 1:
       criar();
@@ -44,3 +52,5 @@ while (opcao !== 3) {
       break;
   };
 };
+
+console.table(itens);
