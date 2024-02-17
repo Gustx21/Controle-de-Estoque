@@ -7,7 +7,7 @@
     <li>Oportunidade de praticar conceitos de estrutura de dados e boas práticas de codificação.</li>
 </ol>
 
-<h2>## Tecnologias Utilizada⚡s</h2>
+<h2>## Tecnologias Utilizadas⚡</h2>
 <ul>
     <li>JavaScript Puro</li>
 </ul>
