@@ -1,10 +1,8 @@
-let itens;
+let produto, quantidade, itens;
 let estoque = [];
 let opcao = 0;
 
 function criar() {
-  let produto, total;
-
   produto = prompt("Digite o nome do produto:").toUpperCase().trim();
   quantidade = parseFloat(prompt(`Digite a quantidade total de ${produto}:`));
 
@@ -17,6 +15,8 @@ function criar() {
   estoque.push(itens);
 
   alert(`O item ${produto} foi adicionado com ${quantidade} unidades.`);
+
+  return estoque;
 };
 
 function listar() {
@@ -26,24 +26,45 @@ function listar() {
   };
 
   const listarEstoque = estoque.map(function (item, indice) {
-    return `${indice + 1}. ${itens.produto}: ${itens.quantidade} unidades.`
+    return `${indice + 1}. ${item.produto}: ${item.quantidade} unidades.`
   }).join("\n");
 
   alert(`Itens no estoque:\n${listarEstoque}`);
 };
 
+function alterar() {
+  listar();
+  const indice = parseInt(prompt("insira o número do item que dejesa alterar.")) - 1;
+
+  if (isNaN(indice) || indice < 0 || indice > estoque.length) {
+    alert("Insira um valor válido.");
+    return;
+  };
+
+  const novaQuantidade = parseInt(prompt(`Insira a nova quantidade para ${estoque[indice].nome}.`));
+
+  estoque[indice].quantidade = novaQuantidade;
+  alert(`Item "${estoque[indice].produto}" alterado para ${novaQuantidade}.`);
+};
+
 function remover() {
   listar();
 
-  let remove = prompt("Insira o nome do item a ser removida:").toUpperCase().trim();
+  let remove = parseInt(prompt("Insira o número do item a ser removida:")) - 1;
 
-  delete itens[remove];
+  if (isNaN(remove) || remove < 0) {
+    alert("Insira um valor válido.");
+    return;
+  };
 
-  alert(`O item ${remove} foi removido.`);
+  const itemRemovido = estoque[remove].produto;
+  estoque.splice(remove, 1);
+
+  alert(`O item ${itemRemovido} foi removido.`);
 };
 
-while (opcao !== 4) {
-  opcao = parseInt(prompt("Insira uma opção:\n1. Criar.\n2. Listar\n3. Remover.\n4. Sair."));
+while (opcao !== 5) {
+  opcao = parseInt(prompt("Insira uma opção:\n1. Criar.\n2. Listar\n3. Alterar.\n4. Remover.\n5. Sair."));
 
   switch (opcao) {
     case 1:
@@ -53,9 +74,12 @@ while (opcao !== 4) {
       listar();
       break;
     case 3:
-      remover();
+      alterar();
       break;
     case 4:
+      remover();
+      break;
+    case 5:
       alert("Encerrando.");
       break;
     default:
