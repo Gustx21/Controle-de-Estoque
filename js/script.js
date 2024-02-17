@@ -41,7 +41,7 @@ function alterar() {
     return;
   };
 
-  const novaQuantidade = parseInt(prompt(`Insira a nova quantidade para ${estoque[indice].nome}.`));
+  const novaQuantidade = parseInt(prompt(`Insira a nova quantidade para ${estoque[indice].produto}.`));
 
   estoque[indice].quantidade = novaQuantidade;
   alert(`Item "${estoque[indice].produto}" alterado para ${novaQuantidade}.`);
@@ -61,6 +61,7 @@ function remover() {
   estoque.splice(remove, 1);
 
   alert(`O item ${itemRemovido} foi removido.`);
+  console.log(itemRemovido)
 };
 
 while (opcao !== 5) {
