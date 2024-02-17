@@ -11,9 +11,9 @@
 </ol>
 
 <h2>## Tecnologias Utilizadas</h2>
-<ol>
+<ul>
     <li>JavaScript Puro</li>
-</ol>
+</ul>
 
 <h2>## Contribuição</h2>
 <p>Contribuições são bem-vindas! Sinta-se à vontade para melhorar a estrutura, adicionar funcionalidade ou corrigir qualquer problema identificado.</p>
