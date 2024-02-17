@@ -1,4 +1,4 @@
-let produto, quantidade, itens;
+let produto, quantidade, itens, remove;
 let estoque = [];
 let opcao = 0;
 
@@ -50,7 +50,7 @@ function alterar() {
 function remover() {
   listar();
 
-  let remove = parseInt(prompt("Insira o número do item a ser removida:")) - 1;
+  remove = parseInt(prompt("Insira o número do item a ser removida:")) - 1;
 
   if (isNaN(remove) || remove < 0) {
     alert("Insira um valor válido.");
