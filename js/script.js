@@ -1,6 +1,6 @@
 let produto, quantidade, itens, remove;
 let estoque = [];
-let opcao = 0;
+const opcao = 0;
 
 function criar() {
   produto = prompt("Digite o nome do produto:").toUpperCase().trim();
@@ -11,12 +11,13 @@ function criar() {
     return;
   };
 
-  itens = { produto, quantidade }
+  itens = { 
+    produto: produto, 
+    quantidade: quantidade
+  }
   estoque.push(itens);
 
   alert(`O item ${produto} foi adicionado com ${quantidade} unidades.`);
-
-  return estoque;
 };
 
 function listar() {
