@@ -1,11 +1,11 @@
 <h1>Projeto de Controle de Estoque em JavaScript⚙️</h1>
 
 <h2>Funcionalidades📌</h2>
-<ol>
+<ul type="square">
     <li>Adição de produtos ao estoque com respectivos nomes e quantidades no prompt.</li>
     <li>Visualização intuitiva do estoque atualizado.</li>
     <li>Oportunidade de praticar conceitos de estrutura de dados e boas práticas de codificação.</li>
-</ol>
+</ul>
 
 <h2>Tecnologias Utilizadas⚡</h2>
 <ul>
