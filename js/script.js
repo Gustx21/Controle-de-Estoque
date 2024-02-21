@@ -1,18 +1,24 @@
 let produto, quantidade, itens, remove;
 let estoque = [];
-const opcao = 0;
+let opcao = 0;
 
 function criar() {
   produto = prompt("Digite o nome do produto:").toUpperCase().trim();
   quantidade = parseFloat(prompt(`Digite a quantidade total de ${produto}:`));
+
+  // Teste para eliminar valores vazios e números
+  if (produto === Number || produto === null) {
+    alert("Insira um valor válido.");
+    return;
+  };
 
   if (isNaN(quantidade) || quantidade <= 0) {
     alert("Insira um valor válido.");
     return;
   };
 
-  itens = { 
-    produto: produto, 
+  itens = {
+    produto: produto,
     quantidade: quantidade
   }
   estoque.push(itens);
