@@ -4,23 +4,21 @@ let opcao = 0;
 
 function criar() {
   produto = prompt("Digite o nome do produto:").toUpperCase().trim();
-  quantidade = parseFloat(prompt(`Digite a quantidade total de ${produto}:`));
-
-  // Teste para eliminar valores vazios e números
-  if (produto === Number || produto === null) {
+  
+  // Mensagem de erro para valores inválidos ou vazios
+  if (produto.includes(' ')) {
     alert("Insira um valor válido.");
     return;
   };
+
+  quantidade = parseFloat(prompt(`Digite a quantidade total de ${produto}:`));
 
   if (isNaN(quantidade) || quantidade <= 0) {
     alert("Insira um valor válido.");
     return;
   };
 
-  itens = {
-    produto: produto,
-    quantidade: quantidade
-  }
+  itens = {produto: produto, quantidade: quantidade};
   estoque.push(itens);
 
   alert(`O item ${produto} foi adicionado com ${quantidade} unidades.`);
