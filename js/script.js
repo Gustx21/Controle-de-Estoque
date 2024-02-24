@@ -5,8 +5,8 @@ let opcao = 0;
 function criar() {
   produto = prompt("Digite o nome do produto:").toUpperCase().trim();
   
-  // Mensagem de erro para valores inválidos ou vazios
-  if (produto.includes(' ')) {
+  // Corrigindo mensagem de erro para valores inválidos ou vazios
+  if (produto.includes(' ') || produto.replace('', null) == 'null') {
     alert("Insira um valor válido.");
     return;
   };
