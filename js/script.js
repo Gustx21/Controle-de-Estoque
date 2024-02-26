@@ -62,6 +62,12 @@ function remover() {
     return;
   };
 
+  // Mensagem de erro para valor 'produto' case for inválido
+  if (isNaN(produto)) {
+    alert("Insira um valor válido.");
+    return;
+  }
+
   const itemRemovido = estoque[remove].produto;
   estoque.splice(remove, 1);
 
