@@ -55,18 +55,18 @@ function alterar() {
 function remover() {
   listar();
 
+  // Mensagem de erro para caso o estoque estiver vazio
+  if (estoque.length === 0) {
+    alert("Insira um valor válido.");
+    return;
+  }
+
   remove = parseInt(prompt("Insira o número do item a ser removida:")) - 1;
 
   if (isNaN(remove) || remove < 0) {
     alert("Insira um valor válido.");
     return;
   };
-
-  // Mensagem de erro para valor 'produto' case for inválido
-  if (isNaN(produto)) {
-    alert("Insira um valor válido.");
-    return;
-  }
 
   const itemRemovido = estoque[remove].produto;
   estoque.splice(remove, 1);
