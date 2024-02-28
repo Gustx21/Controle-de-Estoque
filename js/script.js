@@ -39,6 +39,9 @@ function listar() {
 
 function alterar() {
   listar();
+
+  if (estoque.length === 0) { return };
+
   const indice = parseInt(prompt("insira o número do item que dejesa alterar.")) - 1;
 
   if (isNaN(indice) || indice < 0 || indice > estoque.length) {
@@ -55,11 +58,7 @@ function alterar() {
 function remover() {
   listar();
 
-  // Mensagem de erro para caso o estoque estiver vazio
-  if (estoque.length === 0) {
-    alert("Insira um valor válido.");
-    return;
-  }
+  if (estoque.length === 0) { return };
 
   remove = parseInt(prompt("Insira o número do item a ser removida:")) - 1;
 
