@@ -4,21 +4,23 @@ let opcao = 0;
 
 function criar() {
   produto = prompt("Digite o nome do produto:").toUpperCase().trim();
+
+  // '/^[a-zA-Z\s]+$/.test(entrada)' lida com erro ortográfico mas não aceita palavras acentuadas
   
   // Corrigindo mensagem de erro para valores numéricos ou vazios
-  if (produto.includes(' ') || produto.replace('', null) === 'null' || produto.replace(/\s+/g, ' ')) {
-    alert("Insira um valor válido.");
+  if (produto.includes(' ') || produto.replace('', null) === 'null' || /^\d+$/.test(produto)) {
+    alert("Insira um valor válido!");
     return;
   };
-
+  
   quantidade = parseFloat(prompt(`Digite a quantidade total de ${produto}:`));
 
-  if (isNaN(quantidade) || quantidade <= 0) {
+  if (isNaN(quantidade) || quantidade <= 0 || quantidade > 650) {
     alert("Insira um valor válido.");
     return;
   };
 
-  itens = {produto: produto, quantidade: quantidade};
+  itens = { produto: produto, quantidade: quantidade };
   estoque.push(itens);
 
   alert(`O item ${produto} foi adicionado com ${quantidade} unidades.`);
@@ -42,7 +44,7 @@ function alterar() {
 
   if (estoque.length === 0) { return };
 
-  const indice = parseInt(prompt("insira o número do item que dejesa alterar.")) - 1;
+  const indice = parseInt(prompt("insira o número do item que deseja alterar.")) - 1;
 
   if (isNaN(indice) || indice < 0 || indice > estoque.length) {
     alert("Insira um valor válido.");
@@ -71,7 +73,6 @@ function remover() {
   estoque.splice(remove, 1);
 
   alert(`O item ${itemRemovido} foi removido.`);
-  console.log(itemRemovido)
 };
 
 while (opcao !== 5) {
