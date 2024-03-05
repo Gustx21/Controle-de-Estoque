@@ -32,7 +32,7 @@ function listar() {
     return;
   };
 
-  const listarEstoque = estoque.map(function (item, indice) {
+  const listarEstoque = estoque.map((item, indice) => {
     return `${indice + 1}. ${item.produto}: ${item.quantidade} unidades.`
   }).join("\n");
 
