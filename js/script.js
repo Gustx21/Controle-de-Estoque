@@ -1,6 +1,4 @@
-let produto, quantidade, itens, remove;
-let estoque = [];
-let opcao = 0;
+let produto, quantidade, itens, remove, opcao = 0, estoque = [];
 
 function criar() {
   produto = prompt("Digite o nome do produto:").toUpperCase().trim();
