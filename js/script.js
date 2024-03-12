@@ -1,24 +1,22 @@
-let produto, quantidade, itens, remove, opcao = 0, estoque = [];
+let opcao = 0, estoque = [];
 
 function criar() {
-  produto = prompt("Digite o nome do produto:").toUpperCase().trim();
-
-  // '/^[a-zA-Z\s]+$/.test(entrada)' lida com erro ortográfico mas não aceita palavras acentuadas
+  let produto = prompt("Digite o nome do produto:").toUpperCase().trim();
   
   // Corrigindo mensagem de erro para valores numéricos ou vazios
-  if (produto.includes(' ') || produto.replace('', null) === 'null' || /^\d+$/.test(produto)) {
+  if (produto.replace('', null) === 'null' || /^\d+$/.test(produto)) {
     alert("Insira um valor válido!");
     return;
   };
   
-  quantidade = parseFloat(prompt(`Digite a quantidade total de ${produto}:`));
+  let quantidade = parseFloat(prompt(`Digite a quantidade total de ${produto}:`));
 
   if (isNaN(quantidade) || quantidade <= 0 || quantidade > 650) {
     alert("Insira um valor válido.");
     return;
   };
 
-  itens = { produto: produto, quantidade: quantidade };
+  let itens = { produto: produto, quantidade: quantidade };
   estoque.push(itens);
 
   alert(`O item ${produto} foi adicionado com ${quantidade} unidades.`);
@@ -31,7 +29,7 @@ function listar() {
   };
 
   const listarEstoque = estoque.map((item, indice) => {
-    return `${indice + 1}. ${item.produto}: ${item.quantidade} unidades.`
+    return `ID: ${indice + 1}. ${item.produto}: ${item.quantidade} unidades.`
   }).join("\n");
 
   alert(`Itens no estoque:\n${listarEstoque}`);
@@ -60,7 +58,7 @@ function remover() {
 
   if (estoque.length === 0) { return };
 
-  remove = parseInt(prompt("Insira o número do item a ser removida:")) - 1;
+  let remove = parseInt(prompt("Insira o número do item a ser removida:")) - 1;
 
   if (isNaN(remove) || remove < 0) {
     alert("Insira um valor válido.");
