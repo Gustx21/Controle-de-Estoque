@@ -29,7 +29,7 @@ function listar() {
   };
 
   const listarEstoque = estoque.map((item, indice) => {
-    return `ID: ${indice + 1}. ${item.produto}: ${item.quantidade} unidades.`
+    return `ID: ${indice + 1} - ${item.produto}: ${item.quantidade} unidades.`
   }).join("\n");
 
   alert(`Itens no estoque:\n${listarEstoque}`);
