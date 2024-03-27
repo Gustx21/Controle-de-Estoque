@@ -4,7 +4,7 @@ function criar() {
   let produto = prompt("Digite o nome do produto:").toUpperCase().trim();
   
   // Corrigindo mensagem de erro para valores numéricos ou vazios
-  if (produto.replace('', null) === 'null' || /^\d+$/.test(produto)) {
+  if (produto !== "" || /^\d+$/.test(produto)) {
     alert("Insira um valor válido!");
     return;
   };
