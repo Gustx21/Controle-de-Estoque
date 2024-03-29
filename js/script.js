@@ -5,13 +5,13 @@ function criar() {
   
   // Corrigindo mensagem de erro para valores numéricos ou vazios
   if (produto !== "" || /^\d+$/.test(produto)) {
-    alert("Insira um valor válido!");
+    alert("Insira um nome válido!");
     return;
   };
   
   let quantidade = parseFloat(prompt(`Digite a quantidade total de ${produto}:`));
 
-  if (isNaN(quantidade) || quantidade <= 0 || quantidade > 650) {
+  if (isNaN(quantidade) || quantidade <= 0 || quantidade > 1000) {
     alert("Insira um valor válido.");
     return;
   };
