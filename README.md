@@ -12,4 +12,4 @@
  Contribuições são bem-vindas! Sinta-se à vontade para melhorar a estrutura, adicionar funcionalidade ou corrigir qualquer problema identificado.
 
 # Aviso⚠️
- Este projeto foi desenvolvido com foco prático com objetivo de proporcionar uma experiência em programação JavaScript, direcionada a gestão de estoque de produtos.. Recomenda-se utilizá-lo como base para aprender e experimentar, mas não necessariamente como uma solução de estoque completa para ambientes de produção.
+ Este projeto foi desenvolvido com foco prático com objetivo de proporcionar uma experiência em programação JavaScript, direcionada a gestão de estoque de produtos. Recomenda-se utilizá-lo como base para aprender e experimentar, mas não necessariamente como uma solução de estoque completa para ambientes de produção.
