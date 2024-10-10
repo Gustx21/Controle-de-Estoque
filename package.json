@@ -1,0 +1,27 @@
+{
+  "name": "inventory-js",
+  "version": "1.0.0",
+  "description": "sistema logístico de gestão de estoque",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gustx21/Controle-de-Estoque.git"
+  },
+  "author": "Gustavo André",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Gustx21/Controle-de-Estoque/issues"
+  },
+  "homepage": "https://github.com/Gustx21/Controle-de-Estoque#readme",
+  "devDependencies": {
+    "prisma": "^5.20.0"
+  },
+  "dependencies": {
+    "@fastify/cors": "^10.0.1",
+    "@prisma/client": "^5.20.0",
+    "fastify": "^5.0.0"
+  }
+}
