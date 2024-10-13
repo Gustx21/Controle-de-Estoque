@@ -62,4 +62,4 @@ async function deleteProduct(id: string): Promise<void> {
     });
 }
 
-export { insertProduct, readProduct, readIdProducts, deleteProduct };
+export { insertProduct, readProduct, readIdProducts, updateProduct, deleteProduct };

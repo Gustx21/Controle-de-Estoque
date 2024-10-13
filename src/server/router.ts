@@ -1,6 +1,6 @@
+import { insertProduct, readProduct, updateProduct, deleteProduct } from "../prisma.js";
 import fastify, { FastifyReply, FastifyRequest } from "fastify";
 import { fastifyCors } from "@fastify/cors";
-import { insertProduct, readProduct, readIdProducts, deleteProduct } from "../src/prisma";
 
 const server = fastify();
 server.register(fastifyCors, { origin: "*" });
@@ -16,7 +16,12 @@ type DeleteProductRequest = {
     id: string;
 }
 
-server.post("/inventory/product=:product/quantity=:quantity/price=:price/provide=:provide", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
+interface UpdateProductRequest extends DeleteProductRequest {
+    opcao: number,
+    data: string | number
+}
+
+server.post("/inventory/product/:id", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
     try {
         const { product, quantity, price, provide } = request.body as InsertProductRequest;
 
@@ -51,9 +56,26 @@ server.get("/inventory", async (request: FastifyRequest, reply: FastifyReply) =>
     }
 })
 
+server.put("/inventory/product/:id/:opcao/:data", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
+    try {
+        const { id, opcao, data } = request.params as UpdateProductRequest;
+
+        if (!id) {
+            reply.status(400).send("Id invalid!");
+            return;
+        }
+
+        await updateProduct(id, opcao, data);
+
+        reply.status(200).send("Update product sucefull");
+    } catch (error) {
+        reply.status(417).send(error);
+    }
+})
+
 server.delete("/inventory/product/:id", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
     try {
-        const {id} = request.params as DeleteProductRequest;
+        const { id } = request.params as DeleteProductRequest;
 
         if (!id) {
             reply.status(400).send("Id invalid!");
