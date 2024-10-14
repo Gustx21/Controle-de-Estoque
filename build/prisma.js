@@ -1,7 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-
-async function insertProduct(name: string, quantity: number, value: number, provide: string): Promise<void> {
+async function insertProduct(name, quantity, value, provide) {
     await prisma.product.create({
         data: {
             product: name,
@@ -9,29 +8,22 @@ async function insertProduct(name: string, quantity: number, value: number, prov
             price: value,
             provide: provide
         }
-    })
+    });
 }
-
-async function readProduct(): Promise<Object[]> {
+async function readProduct() {
     const inventory = await prisma.product.findMany();
-
     return inventory;
 }
-
-async function readIdProducts(id: string): Promise<Object[]> {
+async function readIdProducts(id) {
     const productId = await prisma.product.findMany({
         where: {
             id: id
         }
     });
-
     return productId;
 }
-
-async function updateProduct(id: string, opcao: string | number, data: string | number): Promise<void> {
-    let updateData: object = {};
-
-    // Erro na opção
+async function updateProduct(id, opcao, data) {
+    let updateData = {};
     switch (opcao) {
         case 1:
             updateData = { product: data };
@@ -48,19 +40,16 @@ async function updateProduct(id: string, opcao: string | number, data: string | 
         default:
             break;
     }
-
     await prisma.product.update({
         where: { id: id },
         data: updateData
-    })
+    });
 }
-
-async function deleteProduct(id: string): Promise<void> {
+async function deleteProduct(id) {
     await prisma.product.delete({
         where: {
             id: id
         }
     });
 }
-
 export { insertProduct, readProduct, readIdProducts, updateProduct, deleteProduct };

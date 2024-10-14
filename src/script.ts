@@ -1,51 +1,37 @@
-enum fabricantes {
-  bauducco = "bauducco",
-  ferrero = "ferrero",
-  visconti = "visconti",
-  marilan = "marilan",
-  nenhum= "nenhum"
+interface InventoryItems {
+  id?: string
+  product: string,
+  quantity: number,
+  price: number,
+  provides: string
 }
 
-interface CreatePropriety {
-  id?: string
-  produto: string,
-  quantidade: number,
-  preco: number,
-  fornecedor: string
-}
+document.getElementById("form")?.addEventListener("submit", criar);
+listar();
+document.getElementById("")?.addEventListener("click", alterar);
+document.getElementById("")?.addEventListener("click", remover);
 
 async function criar(): Promise<void> {
   try {
-    const produtoInput = document.getElementById("produto") as HTMLInputElement;
-    const quantidadeInput = document.getElementById("quantidade") as HTMLInputElement;
-    const precoInput = document.getElementById("preco") as HTMLInputElement;
+    const productInput = document.getElementById("product") as HTMLInputElement;
+    const quantityInput = document.getElementById("quantity") as HTMLInputElement;
+    const priceInput = document.getElementById("price") as HTMLInputElement;
+    const provideInput = document.getElementById("provides") as HTMLInputElement;
 
-    const produto: string = produtoInput.value;
-    const quantidade: number = Number(quantidadeInput.value);
-    const preco: number = Number(precoInput.value);
-    let fornecedor: string;
+    const product: string = productInput.value;
+    const quantity: number = Number(quantityInput.value);
+    const price: number = Number(priceInput.value);
+    let provides: string = provideInput.value;
 
-    if (/[\d\s\W]/.test(produto) || isNaN(quantidade) || quantidade <= 0 || quantidade > 10000) {
+    if (/[\d\s\W]/.test(product) || isNaN(quantity) || quantity <= 0 || quantity > 10000) {
       throw new Error("Dados inválidos!");
     };
 
-    switch (produto.toLocaleLowerCase()) {
-      case "pão":
-        fornecedor = fabricantes.bauducco;
-        break;
-      case "nutella":
-        fornecedor = fabricantes.ferrero;
-        break;
-      default:
-        fornecedor = fabricantes.nenhum;
-        break;
-    }
-
-    const estoque: CreatePropriety = {
-      produto,
-      quantidade,
-      preco,
-      fornecedor
+    const estoque: InventoryItems = {
+      product,
+      quantity,
+      price,
+      provides
     };
 
     await fetch("http://localhost:3000/", {
@@ -55,6 +41,8 @@ async function criar(): Promise<void> {
       },
       body: JSON.stringify(estoque)
     });
+
+    setTimeout(() => { listar() }, 2000);
   } catch (error) {
     alert(`Error de dados: ${error}`);
   }
@@ -62,18 +50,46 @@ async function criar(): Promise<void> {
 
 async function listar(): Promise<void> {
   try {
-    const response = await fetch("http://localhost:3000/inventory");
-    const estoque = await response.json();
-    const inventoryTable: HTMLElement | null= document.getElementById("estoque");
+    const response: Response = await fetch("http://localhost:3000/inventory");
+    const estoque: InventoryItems[] = await response.json();
+    const inventoryTable = document.getElementById("estoque") as HTMLDataElement;
 
-    if (estoque.length === 0) {
-      throw new Error("O estoque está vazio.");
-    };
+    estoque.forEach((item: InventoryItems) => {
+      // Criar o cabeçalho
+      const thead = document.createElement('thead');
+      const headerRow = document.createElement('tr');
 
-    estoque.forEarch((item: CreatePropriety) => {
-      const row = document.createElement("div");
-      row.innerHTML = `ID: ${item.id} - ${item.produto}: ${item.quantidade} unidades. Fornecedor: ${item.fornecedor}`;
-      inventoryTable?.appendChild(row);
+      const headers = ['Produto', 'Quantidade', 'Preço', 'Fornecedor'];
+      headers.forEach(headerText => {
+        const th = document.createElement('th');
+        th.textContent = headerText;
+        headerRow.appendChild(th);
+      });
+
+      thead.appendChild(headerRow);
+      inventoryTable.appendChild(thead);
+
+      // Criar o corpo da tabela
+      const tbody = document.createElement('tbody');
+      const row = document.createElement('tr');
+
+      const produtoCell = document.createElement('td');
+
+      row.appendChild(produtoCell);
+
+      const quantidadeCell = document.createElement('td');
+      quantidadeCell.textContent = item.quantity.toString();
+      row.appendChild(quantidadeCell);
+
+      const precoCell = document.createElement('td');
+      precoCell.textContent = item.price.toFixed(2).toString();
+      row.appendChild(precoCell);
+
+      const fornecedorCell = document.createElement('td');
+      fornecedorCell.textContent = item.provides;
+      row.appendChild(fornecedorCell);
+
+      tbody.appendChild(row);
     });
   } catch (error) {
     alert(`Valores não encontrados: ${error}`);
@@ -82,11 +98,14 @@ async function listar(): Promise<void> {
 
 async function alterar(): Promise<void> {
   try {
-    const novaQuantidade = 2;
-    const id = 2;
+    const newQuantityInput = document.getElementById("newQuantity") as HTMLInputElement;
+    const idInput = document.getElementById("idProduct") as HTMLInputElement;
 
-    if (!novaQuantidade || isNaN(Number(novaQuantidade)) || Number(novaQuantidade) <= 0) {
-      alert("Quantidade inválida!");
+    const newQuantity = Number(newQuantityInput.value);
+    const id = idInput.value;
+
+    if (!newQuantity || isNaN(Number(newQuantity)) || Number(newQuantity) <= 0) {
+      alert("Quantity inválida!");
       return;
     }
 
@@ -95,7 +114,7 @@ async function alterar(): Promise<void> {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ quantidade: Number(novaQuantidade) })
+      body: JSON.stringify({ quantity: Number(newQuantity) })
     });
 
     alert("Quantidade alterada com sucesso!");
@@ -104,8 +123,11 @@ async function alterar(): Promise<void> {
   }
 };
 
-async function remover(id: string): Promise<void> {
+async function remover(): Promise<void> {
   try {
+    const idInput = document.getElementById("idRemover") as HTMLInputElement;
+    const id = idInput.value;
+
     await fetch(`http://localhost:3000/inventory/product/${id}`, {
       method: "DELETE"
     });

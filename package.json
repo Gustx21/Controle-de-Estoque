@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "sistema logístico de gestão de estoque",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/Gustx21/Controle-de-Estoque#readme",
   "devDependencies": {
+    "@types/node": "^22.7.5",
     "prisma": "^5.20.0"
   },
   "dependencies": {

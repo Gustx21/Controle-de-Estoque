@@ -1,92 +1,63 @@
 import { insertProduct, readProduct, updateProduct, deleteProduct } from "../prisma.js";
-import fastify, { FastifyReply, FastifyRequest } from "fastify";
+import fastify from "fastify";
 import cors from "@fastify/cors";
-
 const server = fastify();
 server.register(cors, { origin: "*" });
-
-type InsertProductRequest = {
-    product: string,
-    quantity: number,
-    price: number,
-    provide: string
-}
-
-type DeleteProductRequest = {
-    id: string;
-}
-
-interface UpdateProductRequest extends DeleteProductRequest {
-    opcao: number,
-    data: string | number
-}
-
-server.post("/inventory/product/:id", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
+server.post("/inventory/product/:id", async (request, reply) => {
     try {
-        const { product, quantity, price, provide } = request.body as InsertProductRequest;
-
+        const { product, quantity, price, provide } = request.body;
         if (!product || !quantity || !price || !provide) {
             reply.status(400).send("Values are mandatory!");
             return;
         }
-
         await insertProduct(product, quantity, price, provide);
-
         reply.status(201);
-    } catch (error) {
+    }
+    catch (error) {
         reply.status(400).send(error);
     }
-})
-
-server.get("/inventory", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
+});
+server.get("/inventory", async (request, reply) => {
     try {
         const content = await readProduct();
-
         if (!content) {
             reply.status(404).send("Empty stock list!");
             return;
         }
-
         reply.status(200).send(content);
-    } catch (error) {
+    }
+    catch (error) {
         reply.status(404).send(error);
     }
-})
-
-server.put("/inventory/product/:id/:opcao/:data", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
+});
+server.put("/inventory/product/:id/:opcao/:data", async (request, reply) => {
     try {
-        const { id, opcao, data } = request.params as UpdateProductRequest;
-
+        const { id, opcao, data } = request.params;
         if (!id) {
             reply.status(400).send("Id invalid!");
             return;
         }
-        // Erro na opção e valores data
         await updateProduct(id, opcao, data);
-
         reply.status(200).send("Update product sucefull");
-    } catch (error) {
+    }
+    catch (error) {
         reply.status(417).send(error);
     }
-})
-
-server.delete("/inventory/product/:id", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
+});
+server.delete("/inventory/product/:id", async (request, reply) => {
     try {
-        const { id } = request.params as DeleteProductRequest;
-
+        const { id } = request.params;
         if (!id) {
             reply.status(400).send("Id invalid!");
             return;
         }
-
         await deleteProduct(id);
-
         reply.status(200).send("Delete product sucefull");
-    } catch (error) {
+    }
+    catch (error) {
         reply.status(417).send(error);
     }
-})
-
+});
 server.listen({ port: 3000, host: "localhost" }, (err, address) => {
     if (err) {
         console.error(err);
