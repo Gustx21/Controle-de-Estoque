@@ -3,7 +3,7 @@ import fastify from "fastify";
 import cors from "@fastify/cors";
 const server = fastify();
 server.register(cors, { origin: "*" });
-server.post("/inventory/product/:id", async (request, reply) => {
+server.post("/inventory/product/", async (request, reply) => {
     try {
         const { product, quantity, price, provide } = request.body;
         if (!product || !quantity || !price || !provide) {
@@ -58,7 +58,7 @@ server.delete("/inventory/product/:id", async (request, reply) => {
         reply.status(417).send(error);
     }
 });
-server.listen({ port: 3000, host: "localhost" }, (err, address) => {
+server.listen({ port: 3000 }, (err, address) => {
     if (err) {
         console.error(err);
         process.exit(1);

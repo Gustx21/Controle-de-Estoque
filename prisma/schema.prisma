@@ -7,11 +7,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Product {
+model product {
   id       String   @id @default(auto()) @map("_id") @db.ObjectId
   product  String
   quantity Int
   price    Float
-  provide  String   @unique
+  provide  String  
   date     DateTime @default(now())
 }

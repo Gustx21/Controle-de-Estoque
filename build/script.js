@@ -1,8 +1,6 @@
 "use strict";
 document.getElementById("form")?.addEventListener("submit", criar);
 listar();
-document.getElementById("")?.addEventListener("click", alterar);
-document.getElementById("")?.addEventListener("click", remover);
 async function criar() {
     try {
         const productInput = document.getElementById("product");
@@ -23,7 +21,7 @@ async function criar() {
             price,
             provides
         };
-        await fetch("http://localhost:3000/", {
+        await fetch("http://localhost:3000/inventory/product", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

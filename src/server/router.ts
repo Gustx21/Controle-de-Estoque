@@ -21,7 +21,7 @@ interface UpdateProductRequest extends DeleteProductRequest {
     data: string | number
 }
 
-server.post("/inventory/product/:id", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
+server.post("/inventory/product/", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
     try {
         const { product, quantity, price, provide } = request.body as InsertProductRequest;
 
@@ -87,7 +87,7 @@ server.delete("/inventory/product/:id", async (request: FastifyRequest, reply: F
     }
 })
 
-server.listen({ port: 3000, host: "localhost" }, (err, address) => {
+server.listen({ port: 3000 }, (err, address) => {
     if (err) {
         console.error(err);
         process.exit(1);
