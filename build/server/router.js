@@ -20,10 +20,6 @@ server.post("/inventory/product/", async (request, reply) => {
 server.get("/inventory", async (request, reply) => {
     try {
         const content = await readProduct();
-        if (!content) {
-            reply.status(404).send("Empty stock list!");
-            return;
-        }
         reply.status(200).send(content);
     }
     catch (error) {

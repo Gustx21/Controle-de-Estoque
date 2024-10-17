@@ -3,15 +3,17 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgres"
   url      = env("DATABASE_URL")
 }
 
-model product {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  product  String
+model Product {
+  id       Int   @id @default(autoincrement())
+  product  String @db.VarChar(255)
   quantity Int
   price    Float
-  provide  String  
+  provide  String  @db.VarChar(255)
   date     DateTime @default(now())
+
+  @@map("product")
 }

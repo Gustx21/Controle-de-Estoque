@@ -13,7 +13,7 @@ type InsertProductRequest = {
 }
 
 type DeleteProductRequest = {
-    id: string;
+    id: number;
 }
 
 interface UpdateProductRequest extends DeleteProductRequest {
@@ -41,11 +41,6 @@ server.post("/inventory/product/", async (request: FastifyRequest, reply: Fastif
 server.get("/inventory", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
     try {
         const content = await readProduct();
-
-        if (!content) {
-            reply.status(404).send("Empty stock list!");
-            return;
-        }
 
         reply.status(200).send(content);
     } catch (error) {

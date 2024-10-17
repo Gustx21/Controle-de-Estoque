@@ -12,6 +12,7 @@ async function insertProduct(name, quantity, value, provide) {
 }
 async function readProduct() {
     const inventory = await prisma.product.findMany();
+    console.log(inventory);
     return inventory;
 }
 async function readIdProducts(id) {

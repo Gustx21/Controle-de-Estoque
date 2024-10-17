@@ -12,13 +12,14 @@ async function insertProduct(name: string, quantity: number, value: number, prov
     })
 }
 
-async function readProduct(): Promise<Object[]> {
+async function readProduct(): Promise<Object> {
     const inventory = await prisma.product.findMany();
 
+    console.log(inventory)
     return inventory;
 }
 
-async function readIdProducts(id: string): Promise<Object[]> {
+async function readIdProducts(id: number): Promise<Object[]> {
     const productId = await prisma.product.findMany({
         where: {
             id: id
@@ -28,7 +29,7 @@ async function readIdProducts(id: string): Promise<Object[]> {
     return productId;
 }
 
-async function updateProduct(id: string, opcao: string | number, data: string | number): Promise<void> {
+async function updateProduct(id: number, opcao: string | number, data: string | number): Promise<void> {
     let updateData: object = {};
 
     // Erro na opção
@@ -55,7 +56,7 @@ async function updateProduct(id: string, opcao: string | number, data: string | 
     })
 }
 
-async function deleteProduct(id: string): Promise<void> {
+async function deleteProduct(id: number): Promise<void> {
     await prisma.product.delete({
         where: {
             id: id
