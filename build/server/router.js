@@ -1,9 +1,9 @@
-import { insertProduct, readProduct, updateProduct, deleteProduct } from "../prisma.js";
+import { insertProduct, readProduct, readIdProducts, updateProduct, deleteProduct } from "../prisma.js";
 import fastify from "fastify";
 import cors from "@fastify/cors";
 const server = fastify();
 server.register(cors, { origin: "*" });
-server.post("/inventory/product/", async (request, reply) => {
+server.post("/inventory/product", async (request, reply) => {
     try {
         const { product, quantity, price, provide } = request.body;
         if (!product || !quantity || !price || !provide) {
@@ -20,10 +20,28 @@ server.post("/inventory/product/", async (request, reply) => {
 server.get("/inventory", async (request, reply) => {
     try {
         const content = await readProduct();
+        if (!content) {
+            reply.status(404).send("Not found");
+            return;
+        }
         reply.status(200).send(content);
     }
     catch (error) {
-        reply.status(404).send(error);
+        reply.status(400).send(error);
+    }
+});
+server.get("/inventory/:id", async (request, reply) => {
+    try {
+        const { id } = request.params;
+        const content = await readIdProducts(id);
+        if (!content) {
+            reply.status(404).send("Product Not Found");
+            return;
+        }
+        reply.status(200).send(content);
+    }
+    catch (error) {
+        reply.status(400).send(error);
     }
 });
 server.put("/inventory/product/:id/:opcao/:data", async (request, reply) => {
@@ -37,24 +55,25 @@ server.put("/inventory/product/:id/:opcao/:data", async (request, reply) => {
         reply.status(200).send("Update product sucefull");
     }
     catch (error) {
-        reply.status(417).send(error);
+        reply.status(304).send(error);
     }
 });
 server.delete("/inventory/product/:id", async (request, reply) => {
     try {
         const { id } = request.params;
-        if (!id) {
-            reply.status(400).send("Id invalid!");
+        const productId = Number(id);
+        if (!productId) {
+            reply.status(404).send("Product Not Found");
             return;
         }
-        await deleteProduct(id);
-        reply.status(200).send("Delete product sucefull");
+        await deleteProduct(productId);
+        reply.status(202);
     }
     catch (error) {
-        reply.status(417).send(error);
+        reply.status(500).send(error);
     }
 });
-server.listen({ port: 3000 }, (err, address) => {
+server.listen({ port: 3000, host: "localhost" }, (err, address) => {
     if (err) {
         console.error(err);
         process.exit(1);

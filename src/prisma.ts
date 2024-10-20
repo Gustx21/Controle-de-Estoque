@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
+// Inserção de Dados ao Banco
 async function insertProduct(name: string, quantity: number, value: number, provide: string): Promise<void> {
     await prisma.product.create({
         data: {
@@ -12,14 +13,15 @@ async function insertProduct(name: string, quantity: number, value: number, prov
     })
 }
 
+// Leitura dos Dados do Banco
 async function readProduct(): Promise<Object> {
     const inventory = await prisma.product.findMany();
 
-    console.log(inventory)
     return inventory;
 }
 
-async function readIdProducts(id: number): Promise<Object[]> {
+// Leitura específica dos Dados do Banco
+async function readIdProducts(id: number): Promise<Object> {
     const productId = await prisma.product.findMany({
         where: {
             id: id
@@ -29,6 +31,7 @@ async function readIdProducts(id: number): Promise<Object[]> {
     return productId;
 }
 
+// Atualização dos Dados no Banco
 async function updateProduct(id: number, opcao: string | number, data: string | number): Promise<void> {
     let updateData: object = {};
 
@@ -56,6 +59,7 @@ async function updateProduct(id: number, opcao: string | number, data: string | 
     })
 }
 
+// Remoção dos Dados no Banco
 async function deleteProduct(id: number): Promise<void> {
     await prisma.product.delete({
         where: {
@@ -64,4 +68,5 @@ async function deleteProduct(id: number): Promise<void> {
     });
 }
 
+// Exportação das funções
 export { insertProduct, readProduct, readIdProducts, updateProduct, deleteProduct };
