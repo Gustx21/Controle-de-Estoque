@@ -1,9 +1,27 @@
+enum Provides {
+  M = "3m",
+  Bauducco = "bauducco",
+  Marilan = "marilan",
+  Visconti = "visconti",
+  Linea = "linea",
+  Nissin = "nissin",
+  Colgate = "colgate",
+  Palmolive = "colgate",
+  Ferrero = "ferrero",
+  LaPastina = "la pastina",
+  DonaBenta = "dona benta",
+  Sazon = "sazon",
+  SCJohnson = "scjohnson",
+  Cereser = "cereser",
+  Ajinomoto = "ajinomoto"
+}
+
 interface InventoryItems {
   id?: string
   product: string,
   quantity: number,
   price: number,
-  provides: string
+  provide: string
 }
 
 document.getElementById("form")?.addEventListener("submit", criar);
@@ -18,10 +36,10 @@ async function criar(): Promise<void> {
 
     const product: string = productInput.value;
     const quantity: number = Number(quantityInput.value);
-    const price: number = Number(priceInput.value);
-    let provides: string = provideInput.value;
-
-    if (/[\d\s\W]/.test(product) || isNaN(quantity) || quantity <= 0 || quantity > 10000) {
+    const price: number = parseFloat(priceInput.value);
+    let provide: string = provideInput.value;
+    
+    if (/[\d\s]/.test(product) || isNaN(quantity) || quantity <= 0 || quantity > 10000) {
       throw new Error("Dados inválidos!");
     };
 
@@ -29,8 +47,8 @@ async function criar(): Promise<void> {
       product,
       quantity,
       price,
-      provides
-    };
+      provide
+    }
 
     await fetch("http://localhost:3000/inventory/product", {
       method: "POST",
@@ -40,9 +58,9 @@ async function criar(): Promise<void> {
       body: JSON.stringify(estoque)
     });
 
-    setTimeout(() => { listar() }, 2000);
+    setTimeout(() => { window.location.reload }, 100);
   } catch (error) {
-    alert(`Error de dados: ${error}`);
+    console.error(`Error de dados: ${error}`);
   }
 };
 
@@ -51,43 +69,39 @@ async function listar(): Promise<void> {
     const response: Response = await fetch("http://localhost:3000/inventory");
     const estoque: InventoryItems[] = await response.json();
     const inventoryTable = document.getElementById("estoque") as HTMLDataElement;
+    
+    // Cabeçalho da tabela com Dados
+    const thead = document.createElement('thead');
+    const thProduct = document.createElement('th');
+    const thQuantity = document.createElement('th');
+    const thPrice = document.createElement('th');
+    const thProvide = document.createElement('th');
+    thProduct.textContent = "Produto";
+    thQuantity.textContent = "Quantidade";
+    thPrice.textContent = "Preço";
+    thProvide.textContent = "Fornecedor";
+    thead.append(thProduct, thQuantity, thPrice, thProvide);
 
     estoque.forEach((item: InventoryItems) => {
-      // Criar o cabeçalho
-      const thead = document.createElement('thead');
-      const headerRow = document.createElement('tr');
-
-      const headers = ['Produto', 'Quantidade', 'Preço', 'Fornecedor'];
-      headers.forEach(headerText => {
-        const th = document.createElement('th');
-        th.textContent = headerText;
-        headerRow.appendChild(th);
-      });
-
-      thead.appendChild(headerRow);
-      inventoryTable.appendChild(thead);
-
-      // Criar o corpo da tabela
+      // Corpo da tabela
       const tbody = document.createElement('tbody');
       const row = document.createElement('tr');
-
+      
       const produtoCell = document.createElement('td');
-
-      row.appendChild(produtoCell);
-
+      produtoCell.textContent = item.product;
+      
       const quantidadeCell = document.createElement('td');
       quantidadeCell.textContent = item.quantity.toString();
-      row.appendChild(quantidadeCell);
-
+      
       const precoCell = document.createElement('td');
       precoCell.textContent = item.price.toFixed(2).toString();
-      row.appendChild(precoCell);
-
+      
       const fornecedorCell = document.createElement('td');
-      fornecedorCell.textContent = item.provides;
-      row.appendChild(fornecedorCell);
-
+      fornecedorCell.textContent = item.provide;
+      
+      row.append(produtoCell, quantidadeCell, precoCell, fornecedorCell)
       tbody.appendChild(row);
+      inventoryTable.append(thead, tbody);
     });
   } catch (error) {
     alert(`Valores não encontrados: ${error}`);

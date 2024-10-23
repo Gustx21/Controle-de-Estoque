@@ -1,4 +1,22 @@
 "use strict";
+var Provides;
+(function (Provides) {
+    Provides["M"] = "3m";
+    Provides["Bauducco"] = "bauducco";
+    Provides["Marilan"] = "marilan";
+    Provides["Visconti"] = "visconti";
+    Provides["Linea"] = "linea";
+    Provides["Nissin"] = "nissin";
+    Provides["Colgate"] = "colgate";
+    Provides["Palmolive"] = "colgate";
+    Provides["Ferrero"] = "ferrero";
+    Provides["LaPastina"] = "la pastina";
+    Provides["DonaBenta"] = "dona benta";
+    Provides["Sazon"] = "sazon";
+    Provides["SCJohnson"] = "scjohnson";
+    Provides["Cereser"] = "cereser";
+    Provides["Ajinomoto"] = "ajinomoto";
+})(Provides || (Provides = {}));
 document.getElementById("form")?.addEventListener("submit", criar);
 listar();
 async function criar() {
@@ -9,9 +27,9 @@ async function criar() {
         const provideInput = document.getElementById("provides");
         const product = productInput.value;
         const quantity = Number(quantityInput.value);
-        const price = Number(priceInput.value);
-        let provides = provideInput.value;
-        if (/[\d\s\W]/.test(product) || isNaN(quantity) || quantity <= 0 || quantity > 10000) {
+        const price = parseFloat(priceInput.value);
+        let provide = provideInput.value;
+        if (/[\d\s]/.test(product) || isNaN(quantity) || quantity <= 0 || quantity > 10000) {
             throw new Error("Dados inválidos!");
         }
         ;
@@ -19,7 +37,7 @@ async function criar() {
             product,
             quantity,
             price,
-            provides
+            provide
         };
         await fetch("http://localhost:3000/inventory/product", {
             method: "POST",
@@ -28,10 +46,10 @@ async function criar() {
             },
             body: JSON.stringify(estoque)
         });
-        setTimeout(() => { listar(); }, 2000);
+        setTimeout(() => { window.location.reload; }, 100);
     }
     catch (error) {
-        alert(`Error de dados: ${error}`);
+        console.error(`Error de dados: ${error}`);
     }
 }
 ;
@@ -40,31 +58,30 @@ async function listar() {
         const response = await fetch("http://localhost:3000/inventory");
         const estoque = await response.json();
         const inventoryTable = document.getElementById("estoque");
+        const thead = document.createElement('thead');
+        const thProduct = document.createElement('th');
+        const thQuantity = document.createElement('th');
+        const thPrice = document.createElement('th');
+        const thProvide = document.createElement('th');
+        thProduct.textContent = "Produto";
+        thQuantity.textContent = "Quantidade";
+        thPrice.textContent = "Preço";
+        thProvide.textContent = "Fornecedor";
+        thead.append(thProduct, thQuantity, thPrice, thProvide);
         estoque.forEach((item) => {
-            const thead = document.createElement('thead');
-            const headerRow = document.createElement('tr');
-            const headers = ['Produto', 'Quantidade', 'Preço', 'Fornecedor'];
-            headers.forEach(headerText => {
-                const th = document.createElement('th');
-                th.textContent = headerText;
-                headerRow.appendChild(th);
-            });
-            thead.appendChild(headerRow);
-            inventoryTable.appendChild(thead);
             const tbody = document.createElement('tbody');
             const row = document.createElement('tr');
             const produtoCell = document.createElement('td');
-            row.appendChild(produtoCell);
+            produtoCell.textContent = item.product;
             const quantidadeCell = document.createElement('td');
             quantidadeCell.textContent = item.quantity.toString();
-            row.appendChild(quantidadeCell);
             const precoCell = document.createElement('td');
             precoCell.textContent = item.price.toFixed(2).toString();
-            row.appendChild(precoCell);
             const fornecedorCell = document.createElement('td');
-            fornecedorCell.textContent = item.provides;
-            row.appendChild(fornecedorCell);
+            fornecedorCell.textContent = item.provide;
+            row.append(produtoCell, quantidadeCell, precoCell, fornecedorCell);
             tbody.appendChild(row);
+            inventoryTable.append(thead, tbody);
         });
     }
     catch (error) {

@@ -5,7 +5,8 @@ const server = fastify();
 server.register(cors, { origin: "*" });
 server.post("/inventory/product", async (request, reply) => {
     try {
-        const { product, quantity, price, provide } = request.body;
+        const estoque = request.body;
+        const { product, quantity, price, provide } = estoque;
         if (!product || !quantity || !price || !provide) {
             reply.status(400).send("Values are mandatory!");
             return;
