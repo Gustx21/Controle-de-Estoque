@@ -1,4 +1,4 @@
-![Ícone](https://img.icons8.com/?size=100&id=18462&format=png&color=ffffff)
+
 
 # Projeto de Gerenciador de Estoque em TypeScript
  O projeto destina-se a armazenar dados logístico de produtos, quantidades, preço, fornecedor no Banco de Dados a partir de um método de requisição *POST* a API que extrai os dados da requisição e armazena no **MongoDB**. Também, uma visualição intuitiva dos dados usando o método de requisição *GET*. Além de manipulação intuitiva para remoção e atualização desses dados.
