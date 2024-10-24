@@ -43,7 +43,7 @@ async function criar(): Promise<void> {
       throw new Error("Dados inválidos!");
     };
 
-    const estoque: InventoryItems = {
+    const stock: InventoryItems = {
       product,
       quantity,
       price,
@@ -55,10 +55,10 @@ async function criar(): Promise<void> {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(estoque)
+      body: JSON.stringify(stock)
     });
 
-    setTimeout(() => { window.location.reload }, 100);
+    setTimeout(() => { window.location.reload }, 2000);
   } catch (error) {
     console.error(`Error de dados: ${error}`);
   }
@@ -108,6 +108,8 @@ async function listar(): Promise<void> {
   }
 };
 
+document.getElementById("update")?.addEventListener('click', alterar);
+
 async function alterar(): Promise<void> {
   try {
     const newQuantityInput = document.getElementById("newQuantity") as HTMLInputElement;
@@ -129,11 +131,13 @@ async function alterar(): Promise<void> {
       body: JSON.stringify({ quantity: Number(newQuantity) })
     });
 
-    alert("Quantidade alterada com sucesso!");
+    console.info("Quantidade alterada com sucesso!");
   } catch (error) {
     alert(`Erro ao alterar: ${error}`);
   }
 };
+
+document.getElementById("delete")?.addEventListener('click', remover);
 
 async function remover(): Promise<void> {
   try {
@@ -144,7 +148,7 @@ async function remover(): Promise<void> {
       method: "DELETE"
     });
 
-    alert("Item removido com sucesso!");
+    console.info("Item removido com sucesso!");
   } catch (error) {
     alert(`Erro ao remover item: ${error}`);
   }
