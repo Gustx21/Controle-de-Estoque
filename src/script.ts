@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", listar);
+
 enum Provides {
   M = "3m",
   Bauducco = "bauducco",
@@ -24,10 +26,11 @@ interface InventoryItems {
   provide: string
 }
 
-document.getElementById("form")?.addEventListener("submit", criar);
-listar();
+document.getElementById("form")?.addEventListener("click", criar);
 
-async function criar(): Promise<void> {
+async function criar(event: Event): Promise<void> {
+  event.preventDefault();
+
   try {
     const productInput = document.getElementById("product") as HTMLInputElement;
     const quantityInput = document.getElementById("quantity") as HTMLInputElement;
@@ -58,7 +61,8 @@ async function criar(): Promise<void> {
       body: JSON.stringify(stock)
     });
 
-    setTimeout(() => { window.location.reload }, 2000);
+    
+    setTimeout(() => { window.location.reload() }, 500);
   } catch (error) {
     console.error(`Error de dados: ${error}`);
   }
@@ -85,7 +89,9 @@ async function listar(): Promise<void> {
     estoque.forEach((item: InventoryItems) => {
       // Corpo da tabela
       const tbody = document.createElement('tbody');
+      tbody.classList.add("TableBody");
       const row = document.createElement('tr');
+      row.classList.add("rowTable");
       
       const produtoCell = document.createElement('td');
       produtoCell.textContent = item.product;
@@ -104,7 +110,8 @@ async function listar(): Promise<void> {
       inventoryTable.append(thead, tbody);
     });
   } catch (error) {
-    alert(`Valores não encontrados: ${error}`);
+    console.error(`Valores não encontrados: ${error}`);
+    setTimeout(() => { window.location.reload() }, 360 * 1000);
   }
 };
 
