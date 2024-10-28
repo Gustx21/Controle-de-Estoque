@@ -13,6 +13,9 @@
 2. Armazenagem dos dados no Banco **MongoDB**.
 3. Visualização intuitiva do estoque atualizado.
 
+### Mapa Mental do Projeto
+![Mapa mental do projeto](./image/mapa-mental.png)
+
 ## Tecnologias Utilizadas
 * JavaScript
 * TypeScript
