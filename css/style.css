@@ -1,0 +1,12 @@
+* {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+}
+
+#estoque {
+    border: 1px solid #000;
+}
+
+.rowTable {}
+
+.TableBody {}
