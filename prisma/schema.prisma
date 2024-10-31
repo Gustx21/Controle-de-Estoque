@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Product {
+model Products {
   id       Int   @id @default(autoincrement())
   product  String @db.VarChar(255)
   quantity Int
@@ -15,5 +15,5 @@ model Product {
   provide  String  @db.VarChar(255)
   date     DateTime @default(now())
 
-  @@map("product")
+  @@map("products")
 }
