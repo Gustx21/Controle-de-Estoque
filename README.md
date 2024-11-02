@@ -34,17 +34,17 @@
 
     [EXEMPLO]
     {
-    "product": "Pão de Forma",
-    "preco": 19.99,
-    "quantidade": 3,
-    "provide": "Bauducco"
+        "product": "Pão de Forma",
+        "preco": 19.99,
+        "quantidade": 3,
+        "provide": "Bauducco"
     }
     ```
 
 2. Rota GET para visualizar todos os Dados armazenados no Banco 
     ```http
     GET /inventory HTTP/1.1
-    Host localhost:3000
+    Host: localhost:3000
     ```
 
 3. Rota GET ID para visualizar Dados específicos armazenados no Banco
@@ -61,9 +61,9 @@
 
     [EXEMPLO]
     {
-    "id": 1,
-    "option": 4
-    "data": "Bauducco"
+        "id": 1,
+        "option": 4
+        "data": "Bauducco"
     }
     ```
 
@@ -72,6 +72,10 @@
     POST /inventory/product/:id HTTP/1.1
     Host: localhost:3000
     ```
+
+> [!NOTE]
+>
+> Lembrando que as rotas API são usadas para fins práticos e não para uso público. 
 
 ## Contribuição
  Contribuições são bem-vindas! Sinta-se à vontade para melhorar a estrutura, adicionar funcionalidade ou corrigir qualquer problema identificado.
