@@ -19,7 +19,7 @@ type IdentifyProductRequest = {
 }
 
 interface UpdateProductRequest extends IdentifyProductRequest {
-    opcao: number,
+    option: number,
     data: string | number
 }
 
@@ -77,17 +77,17 @@ server.get("/inventory/:id", async (request: FastifyRequest, reply: FastifyReply
 })
 
 // Atualiza Dados dentro do Banco
-server.put("/inventory/product/:id/:opcao/:data", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
+server.put("/inventory/product/:id/:option/:data", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
     try {
         const response = request.params as UpdateProductRequest;
-        const { id, opcao, data } = response;
+        const { id, option, data } = response;
 
         if (!id) {
             reply.status(400).send("Id invalid!");
             return;
         }
 
-        await updateProduct(Number(id), opcao, data);
+        await updateProduct(Number(id), option, data);
 
         reply.status(200).send("Update product sucefull");
     } catch (error) {

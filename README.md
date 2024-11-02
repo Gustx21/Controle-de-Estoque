@@ -25,6 +25,54 @@
 * Fastify
 * Prisma
 
+## Rotas
+1. Rota POST para cadastrar produtos no Banco de Dados 
+    ```http
+    POST /inventory/product HTTP/1.1
+    Host: localhost:3000
+    Content-Type: application/json
+
+    [EXEMPLO]
+    {
+    "product": "Pão de Forma",
+    "preco": 19.99,
+    "quantidade": 3,
+    "provide": "Bauducco"
+    }
+    ```
+
+2. Rota GET para visualizar todos os Dados armazenados no Banco 
+    ```http
+    GET /inventory HTTP/1.1
+    Host localhost:3000
+    ```
+
+3. Rota GET ID para visualizar Dados específicos armazenados no Banco
+    ```http
+    POST /inventory/:id HTTP/1.1
+    Host: localhost:3000
+    ```
+
+4. Rota PUT para atualizar os Dados dentro no Banco
+    ```http
+    POST /inventory/product/:id/:option/:data HTTP/1.1
+    Host: localhost:3000
+    Content-Type: application/json
+
+    [EXEMPLO]
+    {
+    "id": 1,
+    "option": 4
+    "data": "Bauducco"
+    }
+    ```
+
+5. Rota DELETE para remover os Dados dentro do Banco de Dados
+    ```http
+    POST /inventory/product/:id HTTP/1.1
+    Host: localhost:3000
+    ```
+
 ## Contribuição
  Contribuições são bem-vindas! Sinta-se à vontade para melhorar a estrutura, adicionar funcionalidade ou corrigir qualquer problema identificado.
 
