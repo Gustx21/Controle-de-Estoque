@@ -32,8 +32,8 @@ async function readIdProducts(id: number): Promise<Object> {
 }
 
 // Atualização dos Dados no Banco
-async function updateProduct(id: number, opcao: string | number, data: string | number): Promise<void> {
-    let updateData: object = {};
+async function updateProduct(id: number, opcao: number, data: string | number): Promise<void> {
+    let updateData: Record<string, string | number> = {};
 
     // Erro na opção
     switch (opcao) {

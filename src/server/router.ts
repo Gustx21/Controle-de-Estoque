@@ -79,14 +79,15 @@ server.get("/inventory/:id", async (request: FastifyRequest, reply: FastifyReply
 // Atualiza Dados dentro do Banco
 server.put("/inventory/product/:id/:opcao/:data", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
     try {
-        const { id, opcao, data } = request.params as UpdateProductRequest;
+        const response = request.params as UpdateProductRequest;
+        const { id, opcao, data } = response;
 
         if (!id) {
             reply.status(400).send("Id invalid!");
             return;
         }
-        // Erro na opção e valores data
-        await updateProduct(id, opcao, data);
+
+        await updateProduct(Number(id), opcao, data);
 
         reply.status(200).send("Update product sucefull");
     } catch (error) {
