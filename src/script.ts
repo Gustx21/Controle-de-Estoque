@@ -89,9 +89,7 @@ async function listar(): Promise<void> {
     estoque.forEach((item: InventoryItems) => {
       // Corpo da tabela
       const tbody = document.createElement('tbody');
-      tbody.classList.add("TableBody");
       const row = document.createElement('tr');
-      row.classList.add("rowTable");
       
       const produtoCell = document.createElement('td');
       produtoCell.textContent = item.product;
@@ -119,14 +117,15 @@ document.getElementById("update")?.addEventListener('click', alterar);
 
 async function alterar(): Promise<void> {
   try {
-    const newQuantityInput = document.getElementById("newQuantity") as HTMLInputElement;
+    const newValueInput = document.getElementById("newValue") as HTMLInputElement;
     const idInput = document.getElementById("idProduct") as HTMLInputElement;
 
-    const newQuantity = Number(newQuantityInput.value);
     const id = idInput.value;
+    const option = Number(newValueInput.value);
+    const data = '';
 
-    if (!newQuantity || isNaN(Number(newQuantity)) || Number(newQuantity) <= 0) {
-      alert("Quantity inválida!");
+    if (!option || isNaN(Number(option)) || Number(option) <= 0) {
+      alert("Quantidade inválida!");
       return;
     }
 
@@ -135,7 +134,7 @@ async function alterar(): Promise<void> {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ quantity: Number(newQuantity) })
+      body: JSON.stringify({ option, data })
     });
 
     console.info("Quantidade alterada com sucesso!");

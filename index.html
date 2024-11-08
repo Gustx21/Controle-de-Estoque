@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>North-Distribuidora</title>
 
-    <link rel="shortcut icon" href="#"
-        type="image/x-icon">
+    <link rel="shortcut icon" href="https://img.icons8.com/?size=100&id=112472&format=png&color=F2811D" type="image/x-icon">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,32 +19,36 @@
 
 <body>
     <header>
-        <nav>
+        <menu>
             <a href="#">Serviços</a>
             <a href="#">Produtos</a>
             <a href="#">Contatos</a>
-        </nav>
+        </menu>
     </header>
 
     <form method="post" id="form">
-        <h1>North-Distribuidora</h1>
+        <header>
+            <h2>North-Distribuidora</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt nemo doloribus at sed magnam mollitia autem dolores magni officiis praesentium corrupti aut blanditiis, expedita, fuga ratione cupiditate doloremque! Neque, cupiditate.</p>
+            <img src="./image/report-analysis.png" alt="Funcionários empilhandos blocos">
+        </header>
 
-        <label for="product">Produto:</label>
-        <input type="text" name="product" id="product">
+        <main>
+            <img class="logo" src="https://img.icons8.com/?size=100&id=112472&format=png&color=F2811D" alt="Logo">
 
-        <label for="quantity">Quantidade:</label>
-        <input type="number" name="quantity" id="quantity">
-
-        <label for="price">Preço:</label>
-        <input type="number" name="price" id="price">
-
-        <label for="provide">Fornecedor:</label>
-        <input type="text" name="provide" id="provides">
-
-        <button type="submit">Registrar</button>
+            <label for="product">Produto:</label>
+            <input type="text" name="product" id="product" placeholder="Produto">
+            <label for="quantity">Quantidade:</label>
+            <input type="number" name="quantity" id="quantity" placeholder="Quantidade">
+            <label for="price">Preço:</label>
+            <input type="number" name="price" id="price" placeholder="Preço">
+            <label for="provide">Fornecedor:</label>
+            <input type="text" name="provide" id="provides" placeholder="Fornecedor">
+            <button type="submit">Registrar</button>
+        </main>
     </form>
 
-    <h2>Estoque</h2>
+    <hr>
     <table id="estoque"></table>
 </body>
 

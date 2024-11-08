@@ -3,10 +3,74 @@
     font-optical-sizing: auto;
 }
 
-#estoque {
-    border: 1px solid #000;
+.logo {
+    width: 50px;
+    margin-bottom: 20px;
 }
 
-.rowTable {}
+body {
+    margin: 1em 3em;
+}
 
-.TableBody {}
+menu {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
+menu a {
+    color: #000;
+    text-decoration: none;
+}
+
+#form {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 40px;
+}
+
+#form main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    width: 100%;
+}
+
+#form input {
+    width: fit-content;
+    padding: 5px;
+    margin: 10px 0;
+}
+
+#form button {
+    padding: 10px 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: #F2921D;
+    color: #fff;
+}
+
+#form button:hover {
+    background-color: #f17609;
+}
+
+#estoque {
+    border: 1px solid #000;
+    width: 100%;
+}
+
+tbody {
+    text-align: center;
+}
+
+thead {
+    background-color: #F25D27;
+    color: #fff;
+}
