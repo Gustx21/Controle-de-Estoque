@@ -81,9 +81,11 @@
  Contribuições são bem-vindas! Sinta-se à vontade para melhorar a estrutura, adicionar funcionalidade ou corrigir qualquer problema identificado.
 
 ### Diretrizes de Contribuição
-- Mantenha o código limpo, seguindo as melhores práticas de JavaScript, Express, ORM ou Banco de Dados.
-- Adicione comentátios explicativos após fazer alguma mundança no código para facilitar a compreensão.
-- Seja cordial e construtivo nas discussões Pull Requests.
+- Envios de *Issues* são bem vindos.
+- Detalhe bem os *Issues* onde pode ser melhorado com detalhes e tópicos de melhorias.
+- Adicione comentátios explicativos após fazer *Issues* para mundança no código para facilitar a compreensão.
+- Mantenha o código limpo, seguindo as melhores práticas de TypeScript, JavaScript, Express, ORM ou Banco de Dados.
+- Seja cordial e construtivo nas discussões.
 
 ### Licença
  Este projeto é licenciado sob a [licença MIT](LICENSE), o que significa que você é livre para usar, modificar e distribuir este código.
