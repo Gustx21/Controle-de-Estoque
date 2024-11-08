@@ -32,11 +32,11 @@ async function readIdProducts(id: number): Promise<Object> {
 }
 
 // Atualização dos Dados no Banco
-async function updateProduct(id: number, opcao: number, data: string | number): Promise<void> {
+async function updateProduct(id: number, option: number, data: string | number): Promise<void> {
     let updateData: Record<string, string | number> = {};
 
     // Erro na opção
-    switch (opcao) {
+    switch (option) {
         case 1:
             updateData = { product: data };
             break;

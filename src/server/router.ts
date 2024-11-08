@@ -26,8 +26,8 @@ interface UpdateProductRequest extends IdentifyProductRequest {
 // Insere Dados ao Banco
 server.post("/inventory/product", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
     try {
-        const estoque = request.body as InsertProductRequest;
-        const { product, quantity, price, provide } = estoque;
+        const inventory = request.body as InsertProductRequest;
+        const { product, quantity, price, provide } = inventory;
 
         if (!product || !quantity || !price || !provide) {
             reply.status(400).send("Values are mandatory!");
@@ -77,10 +77,10 @@ server.get("/inventory/:id", async (request: FastifyRequest, reply: FastifyReply
 })
 
 // Atualiza Dados dentro do Banco
-server.put("/inventory/product/:id/:option/:data", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
+server.put("/inventory/product/:id", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
     try {
-        const response = request.params as UpdateProductRequest;
-        const { id, option, data } = response;
+        const { id } = request.params as  IdentifyProductRequest;
+        const { option, data } = request.body as UpdateProductRequest;
 
         if (!id) {
             reply.status(400).send("Id invalid!");

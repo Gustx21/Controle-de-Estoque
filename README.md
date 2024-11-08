@@ -49,13 +49,13 @@
 
 3. Rota GET ID para visualizar Dados específicos armazenados no Banco
     ```http
-    POST /inventory/:id HTTP/1.1
+    GET /inventory/:id HTTP/1.1
     Host: localhost:3000
     ```
 
 4. Rota PUT para atualizar os Dados dentro no Banco
     ```http
-    POST /inventory/product/:id/:option/:data HTTP/1.1
+    PUT /inventory/product/:id/:option/:data HTTP/1.1
     Host: localhost:3000
     Content-Type: application/json
 
@@ -69,7 +69,7 @@
 
 5. Rota DELETE para remover os Dados dentro do Banco de Dados
     ```http
-    POST /inventory/product/:id HTTP/1.1
+    DELETE /inventory/product/:id HTTP/1.1
     Host: localhost:3000
     ```
 
@@ -89,5 +89,5 @@
  Este projeto é licenciado sob a [licença MIT](LICENSE), o que significa que você é livre para usar, modificar e distribuir este código.
  Esperamos contar com sua contribuição para tomar o Projeto JavaScript uma referência de solução práticas em JavaScript. Obrigado por fazer parte desta comunidade!
 
- ## Proprietário do Projeto
+## Proprietário do Projeto
  @Gustx21
