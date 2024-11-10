@@ -1,76 +1,136 @@
+/* Reset básico */
 * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: "Quicksand", sans-serif;
-    font-optical-sizing: auto;
 }
 
-.logo {
-    width: 50px;
-    margin-bottom: 20px;
-}
-
+/* Corpo e layout */
 body {
-    margin: 1em 3em;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1.3fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+        "menu menu menu"
+        "form form form"
+        "table table query"
+        "table table query";
+    height: 100vh;
+    gap: 20px;
+    padding: 0 1rem;
+    background: #F5F5F5;
+    color: #333;
 }
 
+/* Menu */
 menu {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 2rem;
-    margin-top: 2rem;
+    align-items: center;
+    padding: 1rem;
+    grid-area: menu;
+    border-radius: 5px;
 }
 
 menu a {
     color: #000;
     text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: background 0.3s;
+}
+
+menu a:hover {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+/* Formulário de Inserção */
+#form, #query {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #form {
-    display: grid;
-    grid-template-columns: 35% 65%;
-    border: 1px solid #000;
-    border-radius: 10px;
-    padding: 40px;
+    grid-area: form;
 }
 
-#form main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+#form label, #query label {
+    display: block;
+    margin: 0.5rem 0 0.2rem;
 }
 
-img {
+#form input, #query input {
     width: 100%;
-}
-
-#form input {
-    width: fit-content;
-    padding: 5px;
-    margin: 10px 0;
-}
-
-#form button {
-    padding: 10px 30px;
+    padding: 0.5rem;
+    margin-bottom: 0.7rem;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    border: none;
-    background-color: #F2921D;
+}
+
+#form button, #query button {
+    background: #F25D27;
     color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
-#form button:hover {
-    background-color: #f17609;
+#form button:hover, #query button:hover {
+    background: #D24B1B;
 }
 
+/* Formulário de Consulta */
+#query {
+    grid-area: query;
+}
+
+#query input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+/* Tabela de Dados */
 #estoque {
-    border: 1px solid #000;
+    border-collapse: collapse;
     width: 100%;
+    grid-area: table;
+    overflow-x: auto;
 }
 
-tbody {
+#estoque th, #estoque td {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
     text-align: center;
 }
 
-thead {
+#estoque thead {
     background-color: #F25D27;
     color: #fff;
+}
+
+#estoque tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+        grid-template-areas:
+            "menu"
+            "form"
+            "table"
+            "query";
+    }
+
+    menu {
+        flex-direction: column;
+    }
 }
