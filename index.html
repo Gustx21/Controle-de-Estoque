@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>North-Distribuidora</title>
 
-    <link rel="shortcut icon" href="https://img.icons8.com/?size=100&id=112472&format=png&color=F2811D"
-        type="image/x-icon">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400..700&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="https://img.icons8.com/?size=100&id=112472&format=png&color=F2811D"
+        type="image/x-icon">
 
     <link rel="stylesheet" href="./css/style.css">
 
@@ -26,27 +26,36 @@
     </menu>
 
     <form method="post" id="form">
-        <label for="product">Produto:</label>
-        <input type="text" name="product" id="product" placeholder="Produto">
-        <label for="quantity">Quantidade:</label>
-        <input type="number" name="quantity" id="quantity" placeholder="Quantidade">
-        <label for="price">Preço:</label>
-        <input type="number" name="price" id="price" placeholder="Preço">
-        <label for="provide">Fornecedor:</label>
-        <input type="text" name="provide" id="provides" placeholder="Fornecedor">
-
+        <div>
+            <label for="product">Produto:</label>
+            <input type="text" name="product" id="product" placeholder="Produto">
+            <label for="quantity">Quantidade:</label>
+            <input type="number" name="quantity" id="quantity" placeholder="Quantidade">
+            <label for="price">Preço:</label>
+            <input type="number" name="price" id="price" placeholder="Preço">
+            <label for="provide">Fornecedor:</label>
+            <input type="text" name="provide" id="provides" placeholder="Fornecedor">
+        </div>
         <button type="submit">Registrar</button>
+        <img src="image/report-analysis.png" alt="">
     </form>
 
-    <table id="estoque"></table>
+    <table id="estoque">
+        <thead>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Preço</th>
+            <th>Fornecedor</th>
+        </thead>
+    </table>
 
     <form method="get" id="query">
         <label for="query">Consulte:</label>
         <input type="text" name="query" id="query">
 
-        <input type="checkbox" name="maximo" id="maximo"> Máximo
-        <input type="checkbox" name="medium" id="medium"> Médio
-        <input type="checkbox" name="minimos" id="minimos"> Mínimo
+        <label><input type="checkbox" name="maximo" id="maximo"> Máximo</label>
+        <label><input type="checkbox" name="medium" id="medium"> Médio</label>
+        <label><input type="checkbox" name="minimos" id="minimos"> Mínimo</label>
 
         <button type="submit">Consultar</button>
     </form>
