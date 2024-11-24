@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,34 +12,38 @@
     <link rel="shortcut icon" href="https://img.icons8.com/?size=100&id=112472&format=png&color=F2811D"
         type="image/x-icon">
 
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <script type="module" src="build/script.js" defer></script>
 </head>
-
 <body>
     <menu>
         <a href="#">Serviços</a>
         <a href="#">Produtos</a>
         <a href="#">Contatos</a>
+
+        <nav>
+            <button type="button" class="btn">Sou Empresa</button>
+            <button type="button" class="btn">Login</button>
+        </nav>
     </menu>
 
     <form method="post" id="form">
         <div>
             <label for="product">Produto:</label>
-            <input type="text" name="product" id="product" placeholder="Produto">
+            <input type="text" name="product" id="product" placeholder="Ex.: Cookies Choc ao Leite 40g">
+
             <label for="quantity">Quantidade:</label>
-            <input type="number" name="quantity" id="quantity" placeholder="Quantidade">
-            <label for="price">Preço:</label>
-            <input type="number" name="price" id="price" placeholder="Preço">
+            <input type="number" name="quantity" id="quantity" placeholder="Ex.: 10">
+
             <label for="provide">Fornecedor:</label>
-            <input type="text" name="provide" id="provides" placeholder="Fornecedor">
+            <input type="text" name="provide" id="provides" placeholder="Ex.: Bauducco">
         </div>
-        <button type="submit">Registrar</button>
-        <img src="image/report-analysis.png" alt="">
+        <button type="submit" class="btn">Registrar</button>
+        <img src="image/report-analysis.png" alt="Analista verificando dados em um quadro com gráficos">
     </form>
 
-    <table id="estoque">
+    <table id="stock">
         <thead>
             <th>Produto</th>
             <th>Quantidade</th>
@@ -50,15 +53,22 @@
     </table>
 
     <form method="get" id="query">
-        <label for="query">Consulte:</label>
-        <input type="text" name="query" id="query">
+        <h2>Filtre sua Busca:</h2>
+        <hr>
 
-        <label><input type="checkbox" name="maximo" id="maximo"> Máximo</label>
-        <label><input type="checkbox" name="medium" id="medium"> Médio</label>
-        <label><input type="checkbox" name="minimos" id="minimos"> Mínimo</label>
+        <label for="product">Produto</label>
+        <input type="text" name="product" id="productQuery" placeholder="Ex.: Bisc Marilan Tortinha ao Leite 40g">
 
-        <button type="submit">Consultar</button>
+        <Label for="quantity">Quantidade</Label>
+        <input type="text" name="quantity" id="quantityQuery" placeholder="Ex.: 10">
+
+        <Label for="provide">Fornecedor</Label>
+        <input type="text" name="provide" id="provideQuery" placeholder="Ex.: Marilan">
+        
+        <Label for="price">Preço</Label>
+        <input type="range" name="price" id="priceRange">
+
+        <button type="submit" class="btn" id="filters">Filtrar</button>
     </form>
 </body>
-
 </html>

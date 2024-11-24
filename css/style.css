@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     font-family: "Markazi Text", serif;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 /* Corpo e layout */
@@ -66,6 +66,7 @@ menu a:hover {
     grid-area: img;
     width: 50%;
     justify-self: center;
+    align-self: center;
 }
 
 #form label,
@@ -86,21 +87,19 @@ menu a:hover {
     border-radius: 5px;
 }
 
-#form button,
-#query button {
+.btn {
     grid-area: button;
     width: fit-content;
     background: #F25D27;
     color: #fff;
-    padding: 0.5rem 1rem;
+    padding: 0.3rem 0.5em;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s;
 }
 
-#form button:hover,
-#query button:hover {
+.btn:hover {
     background: #D24B1B;
 }
 
@@ -109,16 +108,19 @@ menu a:hover {
     grid-area: query;
     display: flex;
     flex-direction: column;
-    height: 250px;
+    height: max-content;
 }
 
-#query input[type="checkbox"] {
-    width: auto;
-    margin-right: 0.5rem;
+#query h2 {
+    font-size: 24px;
+}
+
+#query input[type="range"] {
+    accent-color: #D24B1B;
 }
 
 /* Tabela de Dados */
-#estoque {
+#stock {
     grid-area: table;
     border-collapse: collapse;
     width: 100%;
@@ -127,19 +129,19 @@ menu a:hover {
     display: block;
 }
 
-#estoque table {
+#stock table {
     width: 100%;
 }
 
-#estoque th,
-#estoque td {
+#stock th,
+#stock td {
     border: 1px solid #D9D9D9;
     padding: 0.5em;
     text-align: center;
     width: 100%;
 }
 
-#estoque thead {
+#stock thead {
     background-color: #F25D27;
     color: #fff;
 }
@@ -154,6 +156,14 @@ menu a:hover {
             "form"
             "query"
             "table";
+    }
+
+    #form {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        grid-template-areas: 
+            "input"
+            "button";
     }
 
     menu {
