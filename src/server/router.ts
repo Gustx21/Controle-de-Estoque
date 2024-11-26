@@ -1,13 +1,12 @@
-import { insertProduct, readProduct, readIdProducts, updateProduct, deleteProduct } from "../prisma.js";
+import { insertProduct, readProducts, updateProduct, deleteProduct } from "../prisma.js";
 import fastify, { FastifyReply, FastifyRequest } from "fastify";
 import cors from "@fastify/cors";
 
 const server = fastify();
 server.register(cors, { origin: "*" });
 
-
 // Validadores de propriedades
-type InsertProductRequest = {
+type ParamsProductRequest = {
     product: string,
     quantity: number,
     price: number,
@@ -26,7 +25,7 @@ interface UpdateProductRequest extends IdentifyProductRequest {
 // Insere Dados ao Banco
 server.post("/inventory/product", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
     try {
-        const inventory = request.body as InsertProductRequest;
+        const inventory = request.body as ParamsProductRequest;
         const { product, quantity, price, provide } = inventory;
 
         if (!product || !quantity || !price || !provide) {
@@ -45,7 +44,7 @@ server.post("/inventory/product", async (request: FastifyRequest, reply: Fastify
 // Consulta os Dados no Banco
 server.get("/inventory", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
     try {
-        const content = await readProduct();
+        const content = await readProducts();
 
         if (!content) {
             reply.status(404).send("Not found");
@@ -58,28 +57,10 @@ server.get("/inventory", async (request: FastifyRequest, reply: FastifyReply): P
     }
 })
 
-// Consulta um Produto Específico
-server.get("/inventory/:id", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
+// Atualiza Dados dentro do Banco
+server.put("/inventory/product?update=:id", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
     try {
         const { id } = request.params as IdentifyProductRequest;
-
-        const content = await readIdProducts(id);
-
-        if (!content) {
-            reply.status(404).send("Product Not Found");
-            return;
-        }
-
-        reply.status(200).send(content);
-    } catch (error) {
-        reply.status(400).send(error);
-    }
-})
-
-// Atualiza Dados dentro do Banco
-server.put("/inventory/product/:id", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
-    try {
-        const { id } = request.params as  IdentifyProductRequest;
         const { option, data } = request.body as UpdateProductRequest;
 
         if (!id) {
@@ -95,9 +76,8 @@ server.put("/inventory/product/:id", async (request: FastifyRequest, reply: Fast
     }
 })
 
-
 // Deleta Dados dentro do Banco
-server.delete("/inventory/product/:id", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
+server.delete("/inventory/product?delete=:id", async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
     try {
         const { id } = request.params as IdentifyProductRequest;
         const productId = Number(id);

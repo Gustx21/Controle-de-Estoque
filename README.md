@@ -47,13 +47,7 @@
     Host: localhost:3000
     ```
 
-3. Rota GET ID para visualizar Dados específicos armazenados no Banco
-    ```http
-    GET /inventory/:id HTTP/1.1
-    Host: localhost:3000
-    ```
-
-4. Rota PUT para atualizar os Dados dentro no Banco
+3. Rota PUT para atualizar os Dados dentro no Banco
     ```http
     PUT /inventory/product/:id/:option/:data HTTP/1.1
     Host: localhost:3000
@@ -67,7 +61,7 @@
     }
     ```
 
-5. Rota DELETE para remover os Dados dentro do Banco de Dados
+4. Rota DELETE para remover os Dados dentro do Banco de Dados
     ```http
     DELETE /inventory/product/:id HTTP/1.1
     Host: localhost:3000

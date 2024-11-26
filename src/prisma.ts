@@ -14,21 +14,10 @@ async function insertProduct(name: string, quantity: number, value: number, prov
 }
 
 // Leitura dos Dados do Banco
-async function readProduct(): Promise<Object> {
+async function readProducts(): Promise<Object> {
     const inventory = await prisma.products.findMany();
 
     return inventory;
-}
-
-// Leitura específica dos Dados do Banco
-async function readIdProducts(id: number): Promise<Object> {
-    const productId = await prisma.products.findMany({
-        where: {
-            id: id
-        }
-    });
-
-    return productId;
 }
 
 // Atualização dos Dados no Banco
@@ -69,4 +58,4 @@ async function deleteProduct(id: number): Promise<void> {
 }
 
 // Exportação das funções
-export { insertProduct, readProduct, readIdProducts, updateProduct, deleteProduct };
+export { insertProduct, readProducts, updateProduct, deleteProduct };
