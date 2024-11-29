@@ -17,6 +17,19 @@
    
 ![Mapa mental do projeto](./image/mapa-mental.png)
 
+## Estrutura da Pasta
+```shell
+/controle-de-estoque    # Pasta do Projeto
+    /build              # Todo o projeto compilado em JS
+    /css                # Estilização da Página
+    /image              # Imagens do Projeto e Mapa Mental
+    /node_modules       # Dependências dos Frameworks
+    /prisma             # Modelos de Dados do Prisma
+        /migrations     # Migração para o Banco de Dados
+    /src                # Código-fonte principal da aplicação
+        /server         # Definições de Rotas da API
+```
+
 ## Tecnologias Utilizadas
 * JavaScript
 * TypeScript
