@@ -43,13 +43,14 @@
         <img src="image/report-analysis.png" alt="Analista verificando dados em um quadro com gráficos">
     </form>
 
-    <table id="stock">
+    <table>
         <thead>
             <th>Produto</th>
             <th>Quantidade</th>
             <th>Preço</th>
             <th>Fornecedor</th>
         </thead>
+        <tbody id="stock"></tbody>
     </table>
 
     <form method="get" id="query">
@@ -68,7 +69,7 @@
         <Label for="price">Preço</Label>
         <input type="range" name="price" id="priceRange">
 
-        <button type="submit" class="btn" id="filters">Filtrar</button>
+        <button type="button" class="btn" id="filters">Filtrar</button>
     </form>
 </body>
 </html>

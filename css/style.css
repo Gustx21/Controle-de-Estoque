@@ -120,7 +120,7 @@ menu a:hover {
 }
 
 /* Tabela de Dados */
-#stock {
+table {
     grid-area: table;
     border-collapse: collapse;
     width: 100%;
@@ -129,11 +129,11 @@ menu a:hover {
     display: block;
 }
 
-#stock table {
+table {
     width: 100%;
 }
 
-#stock th,
+table th,
 #stock td {
     border: 1px solid #D9D9D9;
     padding: 0.5em;
@@ -141,7 +141,7 @@ menu a:hover {
     width: 100%;
 }
 
-#stock thead {
+thead {
     background-color: #F25D27;
     color: #fff;
 }
